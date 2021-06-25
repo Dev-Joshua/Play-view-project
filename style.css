@@ -1,0 +1,335 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #392b58;
+    font-family: 'Ubuntu', sans-serif;
+}
+/* En esta declaracion con justyfy-content separamos los elementos de extremo a extremo */
+/* con align-items alineamos el contenido (los elementos hijos) de este contenedor de manera centrada */
+.header {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header__img {
+    width: 200px;
+}
+.header__menu {
+    margin-right: 20px;
+}
+/* En esta declaracion se crea el menu desplegable (ul/li) */
+/* Con display: none le decimos que no muestre las ul. (Es necesario para producir el efecto :hover con display:block)*/
+.header__menu ul {
+    display: none;
+    list-style: none;
+    padding: 0px;
+    position: absolute;
+    width: 100px;
+    text-align: right;
+    margin: 0px 0px 0px -15px;
+}
+/* En esta declaracion agregamos la pseudoclase(:hover) para definir un efecto cuando se posa el mouse en el menu y las (ul) */
+/* Con display:block se muestra el menu (ul) Posando el mouse.   */
+.header__menu:hover ul, ul:hover {
+    display: block;
+}
+.header__menu li {
+    margin: 10px 0; 
+}
+.header__menu li a{
+    color: #ffffff;
+    text-decoration: none;
+}
+/* En esta declaracion le agregamos hover a la etiqueta(a), mostrara la palabra subrayada cuando se pose el mouse en ella */
+.header__menu li a:hover {
+    text-decoration: underline;
+}
+.header__menu--profile {
+    margin-top: 10px;
+    margin-right: 10px;
+    display: flex;
+    /*Se alinean los elementos de este contenedor(img y p)*/
+    align-items: center;
+}
+.header__menu--profile img {
+    margin-right: 8px;
+    width: 50px;
+}
+.header__menu--profile p {
+    color: #ffffff;
+}
+
+
+/* Se crea el contenedor del input busqueda. Se toma como direccion del display a column(verticalmente) como eje principal */
+/* Por lo tanto se centra el contenido con align-items(horizontalmente) tomado como eje secundario  */
+.main {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    justify-content: center;
+}
+.main__title {
+    color: #ffffff;
+    font-size: 22px;
+    /* con el margin-bottom separamos el buscador del titulo */
+    margin-bottom: 20px;
+}
+.input {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid #ffffff;
+    border-radius: 25px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 16px;
+    height: 45px;
+    outline: none;
+    padding: 0px 20px;
+    width: 70%;
+    color: white;
+}
+/* Con esta declaracion le doy color a la palabra buscar de mi barra.(placeholder) */
+::placeholder {
+    color: #ffffff;
+}
+.input:focus {
+    border: 2px solid #8438db;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.input::placeholder {
+    color: #fff;
+    font-weight: 700;
+}
+
+/* En esta declaracion estilamos el texto encima del carrousel */
+.categories__title {
+    color: white;
+    font-size: 20px;
+    padding-left: 30px;
+    position: absolute;
+    width: 100%;
+}
+
+
+/* En esta declaracion se crea la seccion para el carousel. ocupara toda la pantalla con (width) y con
+la propiedad overflow se le aplica el efecto scroll al carousel */
+.carousel {
+    width: 100%;
+    overflow: scroll;
+    padding: 20px;
+    /* Con position relative le decimos a los elementos
+    del contenedor que se posicionen en relacion al padre */
+    position: relative;
+}
+.carousel__container {
+    /* Con esta propiedad (nowrap) evitamos que el contenido se vaya hacia abajo.
+    Asi sigue su flujo natural que es horizontalmente */
+    white-space: nowrap;
+    margin: 60px 0px;
+    padding-bottom: 10px;
+}
+/* Se crean los elementos(cards) del carousel */
+.carousel-item {
+    background-color: aquamarine;
+    width: 200px;
+    height: 250px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-right: 10px;
+    /* Se cambia el display por defecto del contenedor(div)
+    por inline-block. asi se alinearan los elementos horizontalmente en vez de bloque */
+    display: inline-block;
+    /* Se cambiara el icono del mouse cuando se pose sobre el elemento(item) */
+    cursor: pointer;
+    /* Agregando estas propiedades(transition, transform-origin) se va a ver mucho mas suave la animacion */
+    transition: 350ms all;
+    transform-origin: center left;
+    position: relative;
+}
+/* En esta declaracion se le agrega una pseudo-clase al elemento(item)
+la cual le permitira que cuando se haga hover sobre un item los demas se desplacen hacia la derecha */
+.carousel-item:hover ~ .carousel-item {
+    transform: translate3d(100px, 0, 0);
+}
+/* Aqui declaramos que cuando se pose sobre un elemento(item) del contenedor, la opacidad del resto sera menor */
+.carousel__container:hover .carousel-item {
+    opacity: 0.2;
+}
+/* En esta declaracion con la propiedad trnasform(scale) le damos una mayor escala al elemento(item)
+sobre el que se este posando el cursor. Con opacity se le da luminocidad exclusivamente a ese elemento mientras el resto es opaco*/
+.carousel__container:hover .carousel-item:hover {
+    transform: scale(1.5);
+    opacity: 1;
+}
+
+/* En esta declaracion ajustamos el tamaño de la imagen del elemento(item)*/
+.carousel-item__img {
+    width: 200px;
+    height: 250px;
+    /* Con esta propiedad la imagen recupera su tamaño original.(mas nitidez) */
+    object-fit: cover;
+}
+/* En esta declaracion se va a estilar los detalles del elemento(item) 
+Se genera un gradiente desde el color transparente al mas oscuro.(desvanecido)
+Este efecto se vera cuando se pose el cursor sobre los detalles*/
+.carousel-item__details {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+    font-size: 10px;
+    /*Esta opacidad se deja en cero para que coja el efecto (:hover) abajo.
+    cuando se expanda el item se creara el gradiente, que sera nuestra animacion(transition) */
+    opacity: 0;
+    transition: 450ms opacity;
+    /* Estilamos la posicion de los (details), Con (padding) se separan los textos
+    y con (top,left,r,b en 0) se ocupa todo el efecto gradient en el item.  */
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; 
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+    color: white;
+}
+/* Con esta pseudoclase activamos la animacion que declaramos arriba con (linear-gradient,opacity y transition) */
+.carousel-item__details:hover {
+    opacity: 1;
+}
+.carousel-item__details img {
+    width: 30px;
+}
+.carousel-item__details p {
+    margin:2px 0px;
+}
+
+.carousel-item__details--title {
+    font-size: 12px;
+}
+/* Editamos el scrollbar para que no se vea tan ancho */
+::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+::-webkit-scrollbar {
+    width: 0px; 
+    height: 0px;  
+    border-radius: 4px;
+}
+::-webkit-scrollbar:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+::-webkit-scrollbar:hover:active {
+    background: #999;
+}
+
+.footer {
+    background-color: #392b58;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 100px;
+    width: 100%;
+}
+.footer a {
+    color: white;
+    cursor: pointer;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 14px;
+    padding-left: 10px;
+    text-decoration: none;
+}
+.footer a:hover {
+    text-decoration: underline;
+}
+
+
+/* Se declaran los breakpoint para los dos mediaqueris */
+@media only screen and (max-width: 800px) {
+    .section-image {
+        margin-top: 40px;
+        background-color: #392b58;
+        height: 400px;
+        width: 100%;
+        border: 2px solid white;
+        border-radius: 20px;
+        background-image: url('https://loshijosdeaztlan.files.wordpress.com/2020/12/5eab5a01204ad32d4c6920e7.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .main {
+        position: absolute;
+        top: 200px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .input {
+        width: 50%;
+    }
+    .categories__title {
+        padding-bottom: 20px;
+        margin-top: 80px;
+    }
+    .carousel {
+        padding: 0px;
+        margin-top: 80px;
+        margin-bottom: -50px;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .header__img {
+        width: 150px;
+    }
+    .header__menu{
+        margin-right: 0px;
+    }
+    .section-image {
+        margin-top: 40px;
+        background-color: #392b58;
+        height: 400px;
+        width: 100%;
+        border-radius: 20px;
+        background-image: url('https://loshijosdeaztlan.files.wordpress.com/2020/12/5eab5a01204ad32d4c6920e7.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .main {
+        position: absolute;
+        top: 200px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .main__title {
+        font-size: 20px;
+    }
+    .input {
+        width: 60%;
+    }
+    .categories__title {
+        padding-left: 10px;
+        margin-top: 80px;
+    }
+    .carousel {
+        padding: 0px;
+        /* margin-top: 50px; */
+        margin-bottom: -70px;
+    }
+    .footer {
+        background-color: #392b58;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100px;
+        width: 100%;
+    }
+}
